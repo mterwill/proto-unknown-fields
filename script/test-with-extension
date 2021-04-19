@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+cd "$(git rev-parse --show-toplevel)"
+
+docker build -qt proto-unknown-fields .
+docker run --rm \
+    -v "$(pwd):/src" \
+    -w /src \
+    proto-unknown-fields \
+    php "$@"
